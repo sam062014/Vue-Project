@@ -2,10 +2,10 @@
 import { ref,watch } from "vue";
 
 // 引入路徑
-import { useAuthForm } from "./composables/useAuthForm";
-import CommonBlock from "./components/CommonBlock.vue";
-import QueryForm from "./components/QueryForm.vue";
-import QueryResult from "./components/QueryResult.vue";
+import { useAuthForm } from "../composables/useAuthForm";
+import CommonBlock from "../components/CommonBlock.vue";
+import QueryForm from "../components/QueryForm.vue";
+import QueryResult from "../components/QueryResult.vue";
 
 const { loginForm, messeage, isLogin, login, logout } = useAuthForm();
 
@@ -22,20 +22,30 @@ watch(//監控policyNo更動時清空errorMessage&result
     result.value = null
   }
 )
+watch(
+  () => isLogin.value,
+  (newVal) => {
+    if (!newVal) {
+      result.value = null;
+      errorMessage.value = '';
+      policyNo.value = '';
+    }
+  }
+);
 
-async function submit(inputNo: string) {
+async function handlePolicySearch(policyNo: string) {
   errorMessage.value = '';
   result.value = null;
 
-  if (!inputNo) return;//檢核若輸入空白就return
+  if (!policyNo) return;//檢核若輸入空白就return
 
   isLoading.value = true;
   try {
     await new Promise(resolve => setTimeout(resolve, 800));
-    if (inputNo === 'P500') {
+    if (policyNo === 'P500') {
       throw new Error('該保單編號已失效或發生系統異常！(代碼：500)');
     }
-    result.value = arrPolicy.includes(inputNo) ? [inputNo] : [];
+    result.value = arrPolicy.includes(policyNo) ? [policyNo] : [];
   } catch (error: any) {
     errorMessage.value = error.message || '查詢失敗';
   } finally {
@@ -71,15 +81,16 @@ async function submit(inputNo: string) {
           <h2>保單查詢系統</h2>
         </template>
 
-        <QueryForm v-model="policyNo" @submit="submit" />
+        <QueryForm v-model="policyNo" @query-policy="handlePolicySearch" />
         <QueryResult 
           :isLoading="isLoading" 
           :errorMessage="errorMessage" 
           :result="result" 
         />
+        <button @click="logout">登出</button>
       </CommonBlock>
       
-      <button @click="logout">登出</button>
+      
     </div>
   </div>
 </template>
