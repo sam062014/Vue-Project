@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref,computed } from 'vue';
+import { computed } from 'vue';
 
-const emit = defineEmits(['submit']);
+const emit = defineEmits(['query-policy']);
 const formatPolicyNo = computed(() => policyNo.value.trim().toUpperCase())
 const policyNo = defineModel<string>({ default: '' });
 function sendToParent() {
-  emit('submit', formatPolicyNo.value);
+  emit('query-policy', formatPolicyNo.value);
 }
 </script>
 

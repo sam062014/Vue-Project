@@ -2,7 +2,6 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "PolicySystemOptions",
   
   // 1. 所有狀態（原本的 ref, reactive）都集中在 data 函式中回傳
   data() {

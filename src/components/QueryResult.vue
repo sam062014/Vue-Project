@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <div class="result-zone">
     <p v-if="isLoading">查詢中...</p>
-    <p v-else-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
+    <p v-else-if="errorMessage" :class="'text-danger'">{{ errorMessage }}</p>
     <ul v-else-if="result && result.length">
       <li v-for="item in result" :key="item">{{ item }}</li>
     </ul>
