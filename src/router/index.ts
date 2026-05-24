@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // 引入主元件
-import LoginView from '../vue/Login.vue'
-import LoginBase from '../vue/LoginBase.vue'  
-import LoginOptions from '../vue/LoginOptions.vue'
+import LoginView from '../views/Login.vue'
+import LoginBase from '../views/LoginBase.vue'  
+import LoginOptions from '../views/LoginOptions.vue'
+import CartCalculator from '../views/CartCalculator.vue'
+import TodoList from '../views/TodoList.vue'
 
 
 const router = createRouter({
@@ -25,6 +27,16 @@ const router = createRouter({
       path: '/options',        // 網址 localhost:5173/base 切換到這頁
       name: 'loginOptions',    // 路由名稱
       component: LoginOptions  // 對應 import 進來的元件
+    },
+    {
+      path: '/cart',        
+      name: 'CartCalculator',    // 路由名稱
+      component: CartCalculator  // 對應 import 進來的元件
+    },
+    {
+      path: '/todolist',    
+      name: 'TodoList',    // 路由名稱
+      component: TodoList  // 對應 import 進來的元件
     }
   ],
 })
