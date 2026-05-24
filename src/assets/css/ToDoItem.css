@@ -1,0 +1,76 @@
+/* 每個項目的外框與佈局 */
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+.todo-item:hover {
+  border-color: #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+.item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+.todo-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #42b883; 
+}
+.badge-done {
+  background-color: #e6f4ea;
+  color: #137333;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.todo-text {
+  font-size: 15px;
+  color: #35495e;
+  word-break: break-all;
+}
+
+/* ==========================================================================
+   動作按鈕：基礎、顯示邏輯與顏色樣式（合併精簡優化）
+   ========================================================================== */
+
+/* 1. 統一按鈕基礎設定（預設全隱藏） */
+.btn-edit, .btn-save, .btn-delete {
+  display: none;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* 2. 複合式顯示邏輯：編輯狀態、Hover狀態、打勾狀態 */
+.btn-save,
+.todo-item:hover .btn-edit, .todo-item:hover .btn-delete,
+.todo-item.is-done .btn-edit, .todo-item.is-done .btn-delete {
+  display: block;
+}
+
+/* 3. 按鈕間距與顏色樣式 */
+.btn-edit, .btn-save { margin-right: 8px; }
+
+.btn-edit { background: #f5f5f5; color: #5c6b73; }
+.btn-edit:hover { background: #e0e0e0; color: #333; }
+
+.btn-save { background: #e6f4ea; color: #137333; font-weight: bold; }
+.btn-save:hover { background: #42b883; color: #fff; }
+
+.btn-delete { background: #f8d7da; color: #dc3545; }
+.btn-delete:hover { background: #dc3545; color: #fff; }
